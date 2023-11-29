@@ -161,11 +161,12 @@ void displayEndScreen() {
   fill(0);
   textSize(32);
   textAlign(CENTER, CENTER);
-  text("Game Over", width / 2, height / 3);
+  text("Game Over", width / 2, height / 4);
   
   // Display player's final score or other relevant information
   textSize(20);
-  text("You finished the level in " + turnCount + " turns.", width / 2, height / 2);
+  text("You finished the level in " + turnCount + " turns.", width / 2, height / 3);
+  text("Press the 'Enter' key to restart.", width / 2, height / 2);
 }
 
 //Game controls
@@ -173,10 +174,17 @@ void keyPressed() {
   if (startScreen && keyCode == ENTER) {
     startScreen = false;
   } else if (endScreen && keyCode == ENTER) {
-    // Restart the game or go back to the start screen
+    // Restart the game to go back to the start screen
+    turnCount = 0;
+    player.position.x = 0;
+    player.position.y = 9;
+    for (int i = 0; i <= 4; i++) {
+      playerHistory[i].x = 0;
+      playerHistory[i].y = 9;
+    }
+    
     startScreen = true;
     endScreen = false;
-    // Will insert reset function soon
   }
   
   if (keyCode == 'A' || keyCode == 'a') {
