@@ -7,9 +7,14 @@ class Tile {
     this.tileSize = tileSize;
   }
 
+  // Add a getter method for the position variable
+  PVector getPosition() {
+    return position;
+  }
+
   void display() {
     stroke(20);
-    noFill();
+    fill(170);
     rect(position.x * tileSize, position.y * tileSize, tileSize, tileSize);
   }
-} 
+}
