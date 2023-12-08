@@ -199,4 +199,16 @@ void keyPressed() {
     player.updatePlayerHistory();
     recallMove();
   }
+  
+  // Check if the player is on a key tile
+  Tile playerTile = tiles[(int) player.position.x][(int) player.position.y];
+  if (playerTile instanceof Key) {
+    Key key = (Key) playerTile;
+    // Unlock the associated door
+    if (key.hasDoor()) {
+      key.getDoor().unlock();
+       // Removes key from grid
+      tiles[(int) player.position.x][(int) player.position.y] = new Tile(player.position.x, player.position.y, tileSize);
+    }
+  }
 }

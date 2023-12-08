@@ -20,9 +20,9 @@ class Wall extends Tile {
 void initWalls() {
   wallCoordinates = new ArrayList<PVector>();
   
-  wallCoordinates.add(new PVector(0, 8));
-  wallCoordinates.add(new PVector(1, 8));
-  wallCoordinates.add(new PVector(2, 8));
+  wallCoordinates.add(new PVector(0, 8)); // I understand I could make an array that store these values to clean this up, but I find
+  wallCoordinates.add(new PVector(1, 8)); // that it's easier to keep track of the coordinates this way for now. I will consider cleaning
+  wallCoordinates.add(new PVector(2, 8)); // up the code when I finish.
   wallCoordinates.add(new PVector(3, 8));
   wallCoordinates.add(new PVector(4, 8));
   wallCoordinates.add(new PVector(5, 8));

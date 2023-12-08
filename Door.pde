@@ -1,11 +1,10 @@
 class Door extends Tile {
   boolean isLocked;
-  Key keys; // <-- Here
+  Key associatedKey; // New variable to store the associated key
 
   Door(float x, float y, int tileSize) {
     super(x, y, tileSize);
     isLocked = true;
-    keys = new Key(x, y, tileSize);
   }
 
   // Method to check if the door is locked
@@ -32,12 +31,15 @@ class Door extends Tile {
   }
 
   // Method to set the associated key
-  void setKey(Key keys) {
-    this.keys = keys;
+  void setKey(Key key) {
+    this.associatedKey = key;
+  }
+
+  // Return the associated key
+  Key getKey() {
+    return associatedKey;
   }
 }
-
-
 
 void initDoors() {
   // Initialize Door objects and place them on the grid
@@ -51,6 +53,10 @@ void initDoors() {
   // Associate each key with its corresponding door
   door1.setKey(key1);
   door2.setKey(key2);
+
+  // Set the associated door for each key
+  key1.setAssociatedDoor(door1);
+  key2.setAssociatedDoor(door2);
 
   // Add the doors to the tiles array
   tiles[6][8] = door1;

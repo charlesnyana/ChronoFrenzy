@@ -55,6 +55,16 @@ boolean isWall(int x, int y) {
     }
   }
 
+  // Check if the coordinates correspond to a door
+  if (tiles[x][y] instanceof Door) {
+    Door door = (Door) tiles[x][y];
+    
+    // Check if the door is locked
+    if (door.isLocked()) {
+      return true; // Door is locked, consider it a wall
+    }
+  }
+
   return false; // It's not a wall
 }
 
