@@ -1,14 +1,41 @@
-// Key class (inherits from Tile)
 class Key extends Tile {
-
-  Door associatedDoor; // New variable to store the associated door
+  Door associatedDoor;
   boolean isCollected;
 
-  // Constructor
   Key(float x, float y, int tileSize) {
     super(x, y, tileSize);
     this.isCollected = false;
   }
 
-  // Will add other methods specific to the Key class (e.g., setAssociatedDoor, isCollected, etc.)
+  void setAssociatedDoor(Door door) {
+    this.associatedDoor = door;
+  }
+
+  boolean hasDoor() {
+    return associatedDoor != null;
+  }
+
+  Door getDoor() {
+    return associatedDoor;
+  }
+
+  void display() {
+    float posX = position.x * tileSize;
+    float posY = position.y * tileSize;
+    noStroke();
+    fill(0, 0, 255); // Display keys in blue
+    ellipse(posX + tileSize / 2, posY + tileSize / 2, tileSize * 0.5, tileSize * 0.5);
+  }
+
+  boolean isCollected() {
+    return isCollected;
+  }
+
+  void setCollected(boolean collected) {
+    isCollected = collected;
+  }
+
+  void reset() {
+    isCollected = false;
+  }
 }
