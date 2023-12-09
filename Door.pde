@@ -39,6 +39,11 @@ class Door extends Tile {
   Key getKey() {
     return associatedKey;
   }
+  
+  // Method to lock door for reset
+  void lock() {
+    isLocked = true;
+  }
 }
 
 void initDoors() {

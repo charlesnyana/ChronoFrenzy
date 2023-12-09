@@ -29,9 +29,19 @@ void movePlayer(int x, int y) {
     return;
   }
 
-  // Destination is not a wall, update player position
-  player.position.x = newPlayerX;
-  player.position.y = newPlayerY;
+  // Check if the player is on the teleportation tile and teleportation hasn't occurred
+  if (newPlayerX == 2 && newPlayerY == 3 && !teleportationOccurred) {
+    // Teleport the player to (3, 5)
+    player.position.x = 3;
+    player.position.y = 5;
+    
+    // Iindicates that teleportation has occurred
+    teleportationOccurred = true;
+  } else {
+    // Destination is not the teleportation tile, update player position
+    player.position.x = newPlayerX;
+    player.position.y = newPlayerY;
+  }
 
   turnCount++;
 
@@ -40,6 +50,7 @@ void movePlayer(int x, int y) {
     println("Index " + i + ": (" + playerHistory[i].x + ", " + playerHistory[i].y + ")");
   }
 }
+
 
 
 boolean isWall(int x, int y) {

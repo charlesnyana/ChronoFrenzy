@@ -7,8 +7,14 @@ PVector[] playerHistory = new PVector[]{new PVector(0, 9), new PVector(0, 9), ne
 
 ArrayList<PVector> wallCoordinates;
 
+// Game states
 boolean startScreen = true;
+boolean fail = false;
 boolean endScreen = false;
+
+//Events
+boolean teleportationOccurred = false;
+
 
 //Objects
 Tile[][] tiles; // 2D object array to store tile objects
@@ -38,9 +44,14 @@ void draw() {
   } else if (endScreen) {
     displayEndScreen();
   } else {
-    displayGame();
-    if (player.position.x == 4 && player.position.y == 5) {
-      endScreen = true;
+    if (!fail) {
+      displayGame();
+      if (player.position.x == 4 && player.position.y == 5) {
+        endScreen = true;
+      }
+    } else {
+      // Display a message or prompt for using the recall mechanic
+      displayFailPrompt();
     }
   }
 }
@@ -169,6 +180,69 @@ void displayEndScreen() {
   text("Press the 'Enter' key to restart.", width / 2, height / 2);
 }
 
+void resetGame() {
+  teleportationOccurred = false;
+  turnCount = 0;
+
+  // Clear the tiles array and initialize the grid
+  initGrid();
+
+  // Place keys and doors in their initial positions
+  Door door1 = new Door(6, 8, tileSize);
+  Door door2 = new Door(0, 6, tileSize);
+  Key key1 = new Key(9, 9, tileSize);
+  Key key2 = new Key(2, 5, tileSize);
+
+  // Associate each key with its corresponding door
+  door1.setKey(key1);
+  door2.setKey(key2);
+
+  // Set the associated door for each key
+  key1.setAssociatedDoor(door1);
+  key2.setAssociatedDoor(door2);
+
+  // Add the doors and keys to the tiles array
+  tiles[6][8] = door1;
+  tiles[0][6] = door2;
+  tiles[9][9] = key1;
+  tiles[2][5] = key2;
+
+  // Place walls
+  initWalls();
+
+  // Place the platform
+  initPlatform();
+
+  // Reset the player position and history
+  player.position.x = 0;
+  player.position.y = 9;
+  for (int i = 0; i <= 4; i++) {
+    playerHistory[i].x = 0;
+    playerHistory[i].y = 9;
+  }
+
+  // Redraw the game
+  redraw();
+}
+
+void handleFailKeys() {
+  if (keyCode == ' ' || key == ' ') {
+    // Perform recall mechanic
+    recallMove();
+    // Reset the fail state
+    fail = false;
+  }
+}
+
+void displayFailPrompt() {
+  background(255);
+  fill(0);
+  textSize(20);
+  textAlign(CENTER, CENTER);
+  text("You're falling. Press 'Space' to use the recall mechanic.", width / 2, height / 2);
+}
+
+
 //Game controls
 void keyPressed() {
   if (startScreen && keyCode == ENTER) {
@@ -183,32 +257,45 @@ void keyPressed() {
       playerHistory[i].y = 9;
     }
     
-    startScreen = true;
+    resetGame(); // Finally added reset function
+    
+    startScreen = true;   
     endScreen = false;
-  }
-  
-  if (keyCode == 'A' || keyCode == 'a') {
-    player.movePlayer(-1, 0);
-  } else if (keyCode == 'D' || keyCode == 'd') {
-    player.movePlayer(1, 0);
-  } else if (keyCode == 'W' || keyCode == 'w') {
-    player.movePlayer(0, -1);
-  } else if (keyCode == 'S' || keyCode == 's') {
-    player.movePlayer(0, 1);
-  } else if (keyCode == ' ' || key == ' ') {
-    player.updatePlayerHistory();
-    recallMove();
-  }
-  
-  // Check if the player is on a key tile
-  Tile playerTile = tiles[(int) player.position.x][(int) player.position.y];
-  if (playerTile instanceof Key) {
-    Key key = (Key) playerTile;
-    // Unlock the associated door
-    if (key.hasDoor()) {
-      key.getDoor().unlock();
-       // Removes key from grid
-      tiles[(int) player.position.x][(int) player.position.y] = new Tile(player.position.x, player.position.y, tileSize);
+  } else {
+    if (!fail) {
+      // Check for movement keys and handle player movement
+      if (keyCode == 'A' || keyCode == 'a') {
+      player.movePlayer(-1, 0);
+    } else if (keyCode == 'D' || keyCode == 'd') {
+      player.movePlayer(1, 0);
+    } else if (keyCode == 'W' || keyCode == 'w') {
+      player.movePlayer(0, -1);
+    } else if (keyCode == 'S' || keyCode == 's') {
+      player.movePlayer(0, 1);
+      }
+      
+      // Check if the player is on a key tile
+      Tile playerTile = tiles[(int) player.position.x][(int) player.position.y];
+      if (playerTile instanceof Key) {
+        Key key = (Key) playerTile;
+        if (!key.isCollected()) {
+          // Unlock the associated door
+          if (key.hasDoor()) {
+            key.getDoor().unlock();
+            // Removes key from grid
+            tiles[(int) player.position.x][(int) player.position.y] = new Tile(player.position.x, player.position.y, tileSize);
+            // Set the key as collected
+            key.setCollected(true);
+          }
+        }
+      }
+    } else {
+      // Handle keys when fail is true
+      handleFailKeys();
+    }
+    if (keyCode == ' ' || key == ' ') {
+      player.updatePlayerHistory();
+      recallMove();
     }
   }
 }
