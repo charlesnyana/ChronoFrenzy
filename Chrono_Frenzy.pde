@@ -26,10 +26,7 @@ Key keys;
 
 void setup() {
   size(400, 400);
-  initGrid();
-  initWalls(); //in Walls object
-  initDoors();
-  initPlatform();
+  initializeGame();
   player = new Player(0, 9, tileSize);
   
    // Initialize each element of playerHistory with a new PVector instance
@@ -68,17 +65,6 @@ void displayGame() {
   fill(173, 216, 230); // Will be its own thing later
   stroke(0);
   rect(4 * tileSize, 4 * tileSize, 2 * tileSize, 2 * tileSize);
-}
-
-
-//M1: This function initializes the map
-void initGrid() {
-  tiles = new Tile[numCols][numRows]; // Generates the base grid. mostly as a guide for me but also the the map overlay
-  for (int i = 0; i < numRows; i++) {
-    for (int j = 0; j < numCols; j++) {
-      tiles[i][j] = new Tile(i, j, tileSize);
-    }
-  }
 }
 
 // M1: This function displays the map
@@ -183,35 +169,9 @@ void displayEndScreen() {
 void resetGame() {
   teleportationOccurred = false;
   turnCount = 0;
-
-  // Clear the tiles array and initialize the grid
-  initGrid();
-
-  // Place keys and doors in their initial positions
-  Door door1 = new Door(6, 8, tileSize);
-  Door door2 = new Door(0, 6, tileSize);
-  Key key1 = new Key(9, 9, tileSize);
-  Key key2 = new Key(2, 5, tileSize);
-
-  // Associate each key with its corresponding door
-  door1.setKey(key1);
-  door2.setKey(key2);
-
-  // Set the associated door for each key
-  key1.setAssociatedDoor(door1);
-  key2.setAssociatedDoor(door2);
-
-  // Add the doors and keys to the tiles array
-  tiles[6][8] = door1;
-  tiles[0][6] = door2;
-  tiles[9][9] = key1;
-  tiles[2][5] = key2;
-
-  // Place walls
-  initWalls();
-
-  // Place the platform
-  initPlatform();
+  
+  // Reset doors/locks/keys/platforms
+  initializeGame();
 
   // Reset the player position and history
   player.position.x = 0;

@@ -22,6 +22,30 @@ void movePlayer(int x, int y) {
 
   int newPlayerX = int(position.x + x);
   int newPlayerY = int(position.y + y);
+  
+  // Check if the destination is a pit
+    if (tiles[newPlayerX][newPlayerY].isPit) {
+      // Check if the player is on a platform
+      if (tiles[newPlayerX][newPlayerY] instanceof Platform) {
+        Platform platform = (Platform) tiles[newPlayerX][newPlayerY];
+        if (platform.isActive()) {
+          // Player is on an active platform, update player position
+          position.x = newPlayerX;
+          position.y = newPlayerY;
+        } else {
+          // Player is on an inactive platform, consider it a pit
+          fail = true;
+        }
+      } else {
+        // Player is not on a platform, consider it a pit
+        fail = true;
+      }
+    } else {
+      // Destination is not a pit, update player position
+      position.x = newPlayerX;
+      position.y = newPlayerY;
+    }
+
 
   // Check if the destination is a wall or outside the map bounds
   if (isWall(newPlayerX, newPlayerY)) {
