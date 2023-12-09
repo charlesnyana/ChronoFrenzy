@@ -1,3 +1,4 @@
+// Key class (inherits from Tile)
 class Key extends Tile {
   Door associatedDoor;
   boolean isCollected;
@@ -23,7 +24,7 @@ class Key extends Tile {
     float posX = position.x * tileSize;
     float posY = position.y * tileSize;
     noStroke();
-    fill(0, 0, 255); // Display keys in blue
+    fill(0, 0, 255);
     ellipse(posX + tileSize / 2, posY + tileSize / 2, tileSize * 0.5, tileSize * 0.5);
   }
 

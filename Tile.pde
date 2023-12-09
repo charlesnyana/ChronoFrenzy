@@ -1,17 +1,20 @@
-// Tile class (base class for various tiles)
+// Tile class
 class Tile {
-
   PVector position;
   int tileSize;
 
-  // Constructor
   Tile(float x, float y, int tileSize) {
     position = new PVector(x, y);
     this.tileSize = tileSize;
   }
 
-  // Display the tile
+  PVector getPosition() {
+    return position;
+  }
+
   void display() {
-    // Will add code to display the tile
+    stroke(20);
+    fill(170);
+    rect(position.x * tileSize, position.y * tileSize, tileSize, tileSize);
   }
 }
