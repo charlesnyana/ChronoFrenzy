@@ -14,6 +14,7 @@ boolean endScreen = false;
 
 //Events
 boolean teleportationOccurred = false;
+boolean trapOccured = false;
 int recallCooldown = 4;
 
 
@@ -114,6 +115,7 @@ void recallTrail() {
 void resetGame() {
   endScreen = false;
   startScreen = true;
+  trapOccured = false;
   teleportationOccurred = false;
   turnCount = 0;
   recallCooldown = 4;

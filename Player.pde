@@ -27,7 +27,17 @@ class Player {
       // Destination is a wall or outside the map, do not update player position
       return;
     }
-
+    
+    // This section checks for events.
+    
+    if (newPlayerX == 9 && newPlayerY == 9 && !trapOccured) {
+      
+      wallCoordinates.add(new PVector(7, 9));
+      tiles[7][9] = new Wall(7, 9, tileSize);
+      
+      trapOccured = true;
+    }     
+    
     // Check if the player is on the teleportation tile and teleportation hasn't occurred
     if (newPlayerX == 2 && newPlayerY == 3 && !teleportationOccurred) {
       // Teleport the player to (3, 5)
@@ -53,10 +63,10 @@ class Player {
     recallCooldown--;
     turnCount++;
 
-    println("Player History:");
-    for (int i = 0; i < playerHistory.length; i++) {
-      println("Index " + i + ": (" + playerHistory[i].x + ", " + playerHistory[i].y + ")");
-    }
+    //println("Player History:");
+    //for (int i = 0; i < playerHistory.length; i++) {
+    //  println("Index " + i + ": (" + playerHistory[i].x + ", " + playerHistory[i].y + ")");
+    //}
   }
 
 
@@ -86,23 +96,6 @@ class Player {
 
     return false; // It's not a wall
   }
-
-
-  // Update the player history
-  void updatePlayerHistory() {
-    // Store the player's position in the playerHistory array
-    playerHistory[0] = new PVector(position.x, position.y);
-
-    // Shift the existing positions to make room for the new one
-    for (int i = playerHistory.length - 1; i > 0; i--) {
-      if (playerHistory[i - 1] != null) {
-        playerHistory[i] = playerHistory[i - 1].copy();
-      } else {
-        playerHistory[i] = null; // Set null if the previous position is null
-      }
-    }
-  }
-
 
   void display() {
     fill(red, green, blue); //color of player

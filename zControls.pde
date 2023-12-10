@@ -39,7 +39,13 @@ void controls(int key) {
         player.movePlayer(0, 1);
       }
       break;
-
+    
+    case 'R':
+    case 'r':
+      if (!fail) {
+        resetGame();
+      }
+    
     case ' ':
       if (!fail) {
         recallMove();
@@ -62,7 +68,17 @@ void handleFailKeys() {
 void recallMove() {
   // Check if there are at least four turns recorded in playerHistory
   if (recallCooldown <= 0) {
-    player.updatePlayerHistory();
+    // Store the player's position in the playerHistory array
+    playerHistory[0] = new PVector(player.position.x, player.position.y);
+
+    // Shift the existing positions to make room for the new one
+    for (int i = playerHistory.length - 1; i > 0; i--) {
+      if (playerHistory[i - 1] != null) {
+        playerHistory[i] = playerHistory[i - 1].copy();
+      } else {
+        playerHistory[i] = null; // Set null if the previous position is null
+      }
+    }
     // Move the player to the position four turns back
     player.position.x = playerHistory[4].x;
     player.position.y = playerHistory[4].y;
