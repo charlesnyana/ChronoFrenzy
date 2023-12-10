@@ -1,4 +1,4 @@
-//M1: Player object
+//Player tab: encapsulates the player object and contains the collision logic alongside other relevant functions.
 class Player {
   PVector position;
   int tileSize;
@@ -27,17 +27,17 @@ class Player {
       // Destination is a wall or outside the map, do not update player position
       return;
     }
-    
+
     // This section checks for events.
-    
+
     if (newPlayerX == 9 && newPlayerY == 9 && !trapOccured) {
-      
+
       wallCoordinates.add(new PVector(7, 9));
       tiles[7][9] = new Wall(7, 9, tileSize);
-      
+
       trapOccured = true;
-    }     
-    
+    }
+
     // Check if the player is on the teleportation tile and teleportation hasn't occurred
     if (newPlayerX == 2 && newPlayerY == 3 && !teleportationOccurred) {
       // Teleport the player to (3, 5)

@@ -1,3 +1,4 @@
+// Initialize tab: contains logic for initializing the game used for game start and reset. Object initializations were kept in their respective tabs for easier reference.
 void initGame(){
   initGrid();
   initWalls();

@@ -1,3 +1,4 @@
+// Controls tab: contains the code for player input along with the RECALL mechanic.
 void keyPressed() {
   controls(keyCode);
 }

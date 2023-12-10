@@ -1,3 +1,5 @@
+//Main tab: Display functions of the main game loop and global functions used across multiple objects.
+
 int tileSize = 40; //Size of each tile
 int numRows = 10; //Number of rows
 int numCols = 10; //Number of columns
@@ -109,8 +111,6 @@ void recallTrail() {
     }
   }
 }
-
-
 
 void resetGame() {
   endScreen = false;

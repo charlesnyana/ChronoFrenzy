@@ -1,3 +1,4 @@
+// Platform tab: encapsulates platform object along with the logic associated with them.
 class Platform extends Tile {
   PVector[] path;
   int currentPathIndex;

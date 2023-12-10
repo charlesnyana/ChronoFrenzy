@@ -1,3 +1,4 @@
+// Wall tab: encapsulates wall object along with the logic associated with them.
 class Wall extends Tile {
   Wall(float x, float y, int tileSize) {
     super(x, y, tileSize);

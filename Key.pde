@@ -1,3 +1,4 @@
+// Key tab: encapsulates key object along with the logic associated with them.
 class Key extends Tile {
   Door associatedDoor; // New variable to store the associated door
   boolean isCollected;

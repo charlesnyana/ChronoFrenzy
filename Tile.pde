@@ -1,3 +1,4 @@
+// Tile tab: encapsulates tile object, which serves as the base of the other objects for display.
 class Tile {
   PVector position;
   int tileSize;

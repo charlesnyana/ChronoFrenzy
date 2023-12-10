@@ -1,3 +1,4 @@
+//Screens tab: stores the code for the non-game loop screens such as the start, end, and fail screens.
 void displayStartScreen() {
   // Display elements for the start screen
   background(200);

@@ -1,3 +1,4 @@
+// Door tab: encapsulates door object and associates them with a key.
 class Door extends Tile {
   boolean isLocked;
   Key associatedKey; // New variable to store the associated key
