@@ -24,11 +24,11 @@ class Door extends Tile {
     float posY = position.y * tileSize;
     stroke(0);
     if (isLocked) {
-      fill(255, 200, 0); // Display locked doors in grey
+      image(doorTile, posX, posY, tileSize, tileSize);
     } else {
-      fill(255, 200, 0); // Display unlocked doors in yellow
+      image(doorTileOpen, posX, posY, tileSize, tileSize);
     }
-    rect(posX, posY, tileSize, tileSize);
+    
   }
 
   // Method to set the associated key

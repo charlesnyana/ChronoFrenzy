@@ -2,9 +2,6 @@
 class Player {
   PVector position;
   int tileSize;
-  color red = 255;
-  color green = 0;
-  color blue = 0;
 
   Player(int x, int y, int tileSize) {
     position = new PVector(x, y);
@@ -23,6 +20,7 @@ class Player {
     int newPlayerX = int(position.x + x);
     int newPlayerY = int(position.y + y);
     println("new player X " + newPlayerX + ", new player Y " + newPlayerY);
+    println("Face: " + face);
 
     // Check if the destination is a wall or outside the map bounds
     if (isWall(newPlayerX, newPlayerY)) {
@@ -80,6 +78,7 @@ class Player {
     updateExhaust();
     recallCooldown--;
     turnCount++;
+    
     //println("This is turn " + turnCount);
 
     //println("Player History:");
@@ -117,7 +116,30 @@ class Player {
   }
 
   void display() {
-    fill(red, green, blue); //color of player
-    ellipse(position.x * tileSize + tileSize / 2, position.y * tileSize + tileSize / 2, tileSize, tileSize);
+    //fill(red, green, blue); //color of player
+    //ellipse(position.x * tileSize + tileSize / 2, position.y * tileSize + tileSize / 2, tileSize, tileSize);
+    //int face = faceInput;
+    switch(face) { //0 is left, 1 is right, 2 is up, 3 is down
+      case 0:
+        image(playerLeft, position.x * tileSize, position.y * tileSize);
+        println("img swap left");
+        break;
+        
+        case 1:
+        image(playerRight, position.x * tileSize, position.y * tileSize);
+        println("img swap right");
+        break;
+        
+        case 2:
+        image(playerUp, position.x * tileSize, position.y * tileSize);
+        println("img swap up");
+        break;
+        
+        case 3:
+        image(playerDown, position.x * tileSize, position.y * tileSize);
+        println("img swap dwn");
+        break;
+    }
+      
   }
 }

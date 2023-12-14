@@ -17,6 +17,7 @@ void controls(int key) {
     case 'a':
       if (!fail) {
         player.movePlayer(-1, 0);
+        face = 0;
       }
       break;
 
@@ -24,6 +25,7 @@ void controls(int key) {
     case 'd':
       if (!fail) {
         player.movePlayer(1, 0);
+        face = 1;
       }
       break;
 
@@ -31,6 +33,7 @@ void controls(int key) {
     case 'w':
       if (!fail) {
         player.movePlayer(0, -1);
+        face = 2;
       }
       break;
 
@@ -38,6 +41,7 @@ void controls(int key) {
     case 's':
       if (!fail) {
         player.movePlayer(0, 1);
+        face = 3;
       }
       break;
     

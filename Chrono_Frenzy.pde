@@ -7,6 +7,8 @@ int numCols = 10; //Number of columns
 int turnCount = 0;
 PVector[] playerHistory = new PVector[]{new PVector(0, 9), new PVector(0, 9), new PVector(0, 9), new PVector(0, 9), new PVector(0, 9)};
 
+int face;
+
 ArrayList<PVector> wallCoordinates;
 
 // Game states
@@ -56,15 +58,19 @@ void displayGame() {
   background(255);
   displayGrid();
   
+  if (!teleportationOccurred) {
+    image(portal, 2 * tileSize, 3 * tileSize);
+    image(portal, 3 * tileSize, 5 * tileSize);
+  } else {
+    image(portalOff, 2 * tileSize, 3 * tileSize);
+    image(portalOff, 3 * tileSize, 5 * tileSize);
+  }
+  
   recallTrail();
   player.display();
   turnCountCounter();
   
-  
-  
-  fill(173, 216, 230); // Will be its own thing later
-  stroke(0);
-  rect(4 * tileSize, 4 * tileSize, 2 * tileSize, 2 * tileSize);
+  image(reactor, 4 * tileSize, 4 * tileSize, 2 * tileSize, 2 * tileSize);
 }
 
 // M1: This function displays the map
@@ -74,15 +80,6 @@ void displayGrid() {
     for (int j = 0; j < numCols; j++) {
       rectMode(CORNER);
       stroke(0); // Stroke color (black border)
-      
-      // Check if the tile is a wall and fill it with black color
-      //if (tiles[i][j] instanceof Wall) {
-      //  fill(0);
-      //} else if (tiles[i][j] instanceof Door) {
-      //  fill(255, 255, 0); // Yellow for doors
-      //} else {
-      //  noFill();
-      //}
 
       rect(i * tileSize, j * tileSize, tileSize, tileSize);
       tiles[i][j].display();
@@ -92,7 +89,7 @@ void displayGrid() {
 
 void turnCountCounter() {
 // Display turn count at the top right
-  fill(0);
+  fill(255);
   textSize(16);
   textAlign(RIGHT, TOP);
   text("Turn Count: " + turnCount, width - 10, 10);
@@ -105,11 +102,15 @@ void recallTrail() {
     if (playerHistory[i] != null) {
       PVector position = playerHistory[i];
 
-      float alpha = map(i, 0, 3, 191, 25);
+      float alpha = map(i, 0, 3, 191, 30);
 
-      fill(255, 50, 50, alpha);
-      noStroke();
-      ellipse(position.x * tileSize + tileSize / 2, position.y * tileSize + tileSize / 2, tileSize, tileSize);
+      //fill(20, 50, 255, alpha);
+      //stroke(2);
+      //ellipse(position.x * tileSize + tileSize / 2, position.y * tileSize + tileSize / 2, tileSize, tileSize);
+      tint(255, alpha);
+      image(recallTile, position.x * tileSize, position.y * tileSize);
+      
+      noTint();
     }
   }
 }

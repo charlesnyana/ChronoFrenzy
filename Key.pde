@@ -29,7 +29,7 @@ class Key extends Tile {
     //fill(0, 0, 255); // Display keys in blue
     
     //if (this.isCollected == true) {
-      image(key1B, posX, posY);
+      image(keyTile, posX, posY);
     //} else {
     //  image(key1A, posX, posY);
     //}

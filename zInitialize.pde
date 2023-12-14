@@ -7,6 +7,7 @@ void initGame(){
   initPlatform();
   initExhaust();
   
+  //face = 2;
   player = new Player(0, 9, tileSize);
   
    // Initialize each element of playerHistory with a new PVector instance
