@@ -22,11 +22,16 @@ class Exhaust extends Tile {
   }
 
   void display() {
-    float posX = position.x * tileSize;
-    float posY = position.y * tileSize;
-    stroke(0);
-    fill(active ? 255 : 150, 0, 0);
-    rect(posX, posY, tileSize, tileSize);
+    float posX = 8 * tileSize;
+    float posY = 4 * tileSize;
+    //stroke(0);
+    if (active) {
+    image(exhaustTileB, posX, posY, tileSize*2, tileSize*2);
+    } else {
+    image(exhaustTile, posX, posY, tileSize*2, tileSize*2);
+    }
+    
+    //rect(posX, posY, tileSize, tileSize);
   }
 }
 

@@ -27,11 +27,30 @@ class Platform extends Tile {
 
   // Override the display method to visually represent the platform
   void display() {
-    float posX = position.x * tileSize;
+    float posX = 5 * tileSize;
     float posY = position.y * tileSize;
     stroke(0);
     fill(0, 128, 255); // Light blue color
-    rect(posX, posY, tileSize, tileSize);
+    
+    //image(pitTile, posX, posY);
+    
+    switch(currentPathIndex) {
+      case 0:
+        image(pitTile1, posX, 0);
+        break;
+        
+        case 1:
+        image(pitTile2, posX, 0);
+        break;
+        
+        case 2:
+        image(pitTile3, posX, 0);
+        break;
+        
+        case 3:
+        image(pitTile2, posX, 0);
+        break;
+    }
   }
 }
 

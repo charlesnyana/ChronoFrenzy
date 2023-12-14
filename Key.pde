@@ -26,8 +26,15 @@ class Key extends Tile {
     float posX = position.x * tileSize;
     float posY = position.y * tileSize;
     noStroke();
-    fill(0, 0, 255); // Display keys in blue
-    ellipse(posX + tileSize / 2, posY + tileSize / 2, tileSize * 0.5, tileSize * 0.5);
+    //fill(0, 0, 255); // Display keys in blue
+    
+    //if (this.isCollected == true) {
+      image(key1B, posX, posY);
+    //} else {
+    //  image(key1A, posX, posY);
+    //}
+    
+    //ellipse(posX + tileSize / 2, posY + tileSize / 2, tileSize * 0.5, tileSize * 0.5);
   }
   
   // Method to check if the key is collected

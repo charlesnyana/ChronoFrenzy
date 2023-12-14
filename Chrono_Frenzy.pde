@@ -59,7 +59,9 @@ void displayGame() {
   recallTrail();
   player.display();
   turnCountCounter();
-
+  
+  
+  
   fill(173, 216, 230); // Will be its own thing later
   stroke(0);
   rect(4 * tileSize, 4 * tileSize, 2 * tileSize, 2 * tileSize);
@@ -74,13 +76,13 @@ void displayGrid() {
       stroke(0); // Stroke color (black border)
       
       // Check if the tile is a wall and fill it with black color
-      if (tiles[i][j] instanceof Wall) {
-        fill(0);
-      } else if (tiles[i][j] instanceof Door) {
-        fill(255, 255, 0); // Yellow for doors
-      } else {
-        noFill();
-      }
+      //if (tiles[i][j] instanceof Wall) {
+      //  fill(0);
+      //} else if (tiles[i][j] instanceof Door) {
+      //  fill(255, 255, 0); // Yellow for doors
+      //} else {
+      //  noFill();
+      //}
 
       rect(i * tileSize, j * tileSize, tileSize, tileSize);
       tiles[i][j].display();

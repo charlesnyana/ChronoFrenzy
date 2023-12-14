@@ -16,6 +16,6 @@ class Tile {
   void display() {
     stroke(20);
     fill(170);
-    rect(position.x * tileSize, position.y * tileSize, tileSize, tileSize);
+    image(floorTile, position.x * tileSize, position.y * tileSize);
   }
 }

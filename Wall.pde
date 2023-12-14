@@ -11,7 +11,7 @@ class Wall extends Tile {
     float posY = position.y * tileSize;
     stroke(0);
     fill(0);
-    rect(posX, posY, tileSize, tileSize);
+    image(wallTile, posX, posY, tileSize, tileSize);
   }
 }
 
