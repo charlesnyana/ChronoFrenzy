@@ -26,6 +26,7 @@ Player player; //Declares player as a Tile object
 Wall walls;
 Door door;
 Key keys;
+Exhaust exhaust;
 
 
 void setup() {
@@ -54,7 +55,6 @@ void draw() {
 void displayGame() {
   background(255);
   displayGrid();
-  shiftPlatform();
   
   recallTrail();
   player.display();

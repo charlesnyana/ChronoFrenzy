@@ -17,10 +17,12 @@ class Player {
       // Destination is a wall or outside the map, do not update player position
       return;
     }
-
-
+    
+    shiftPlatform();
+    
     int newPlayerX = int(position.x + x);
     int newPlayerY = int(position.y + y);
+    println("new player X " + newPlayerX + ", new player Y " + newPlayerY);
 
     // Check if the destination is a wall or outside the map bounds
     if (isWall(newPlayerX, newPlayerY)) {
@@ -29,6 +31,21 @@ class Player {
     }
 
     // This section checks for events.
+
+    //Checks if player is on Row 4 exhaust fans
+    if (exhaust != null && exhaust.isActive() && newPlayerY == 4 && (newPlayerX == 8 || newPlayerX == 9)) {
+      // Force the player to enter the fail state
+      fail = true;
+      return;
+    }
+    
+      if (currentPlatformX == newPlayerX && currentPlatformY == newPlayerY) {
+        println("player is on platform");
+        
+      } else if((newPlayerY == 0 || newPlayerY == 1 || newPlayerY == 2) && newPlayerX == currentPlatformX) {
+         println("player is not on platform");
+         fail = true;
+      }
 
     if (newPlayerX == 9 && newPlayerY == 9 && !trapOccured) {
 
@@ -60,8 +77,10 @@ class Player {
     }
 
     checkForKey();
+    updateExhaust();
     recallCooldown--;
     turnCount++;
+    //println("This is turn " + turnCount);
 
     //println("Player History:");
     //for (int i = 0; i < playerHistory.length; i++) {

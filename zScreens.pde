@@ -32,9 +32,9 @@ void displayEndScreen() {
 
 
 void displayFailPrompt() {
-  background(255);
-  fill(0);
+  //background(255);
+  fill(255);
   textSize(20);
   textAlign(CENTER, CENTER);
-  text("You're falling. Press 'Space' to use the recall mechanic.", width / 2, height / 2);
+  text("You're doomed. Press 'Space' to use the recall mechanic.", width / 2, height / 2);
 }

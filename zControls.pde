@@ -46,6 +46,7 @@ void controls(int key) {
       if (!fail) {
         resetGame();
       }
+      break;
     
     case ' ':
       if (!fail) {
@@ -61,6 +62,7 @@ void controls(int key) {
 void handleFailKeys() {
   if (keyCode == ' ' || key == ' ') {
     // Perform recall mechanic
+    recallCooldown = 0;
     recallMove();
     // Reset the fail state
     fail = false;

@@ -4,6 +4,7 @@ void initGame(){
   initWalls();
   initDoors();
   initPlatform();
+  initExhaust();
   
   player = new Player(0, 9, tileSize);
   

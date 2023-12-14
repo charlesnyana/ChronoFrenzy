@@ -1,4 +1,7 @@
 // Platform tab: encapsulates platform object along with the logic associated with them.
+int currentPlatformX;
+int currentPlatformY;
+
 class Platform extends Tile {
   PVector[] path;
   int currentPathIndex;
@@ -15,6 +18,10 @@ class Platform extends Tile {
     if (newIndex != currentPathIndex) {
       currentPathIndex = newIndex;
       position.set(path[currentPathIndex]);
+      //println ("Index: " + currentPathIndex + " Plat pos: (" + position.x + ", " + position.y + ")");
+      currentPlatformX = (int) position.x;
+      currentPlatformY = (int) position.y;
+      println ("Plat pos: (" + currentPlatformX + ", " + currentPlatformY + ")");
     }
   }
 
