@@ -57,7 +57,7 @@ void draw() {
 void displayGame() {
   background(255);
   displayGrid();
-  
+
   if (!teleportationOccurred) {
     image(portal, 2 * tileSize, 3 * tileSize);
     image(portal, 3 * tileSize, 5 * tileSize);
@@ -65,11 +65,11 @@ void displayGame() {
     image(portalOff, 2 * tileSize, 3 * tileSize);
     image(portalOff, 3 * tileSize, 5 * tileSize);
   }
-  
+
   recallTrail();
   player.display();
   turnCountCounter();
-  
+
   image(reactor, 4 * tileSize, 4 * tileSize, 2 * tileSize, 2 * tileSize);
 }
 
@@ -88,13 +88,13 @@ void displayGrid() {
 }
 
 void turnCountCounter() {
-// Display turn count at the top right
+  // Display turn count at the top right
   fill(255);
   textSize(16);
   textAlign(RIGHT, TOP);
   text("Turn Count: " + turnCount, width - 10, 10);
 }
-  
+
 
 //M1: RECALL Trail (shows player's last 4 movements)
 void recallTrail() {
@@ -104,12 +104,9 @@ void recallTrail() {
 
       float alpha = map(i, 0, 3, 191, 30);
 
-      //fill(20, 50, 255, alpha);
-      //stroke(2);
-      //ellipse(position.x * tileSize + tileSize / 2, position.y * tileSize + tileSize / 2, tileSize, tileSize);
-      tint(255, alpha);
+      tint(255, constrain (alpha, 30, 255));
       image(recallTile, position.x * tileSize, position.y * tileSize);
-      
+
       noTint();
     }
   }
